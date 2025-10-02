@@ -410,47 +410,32 @@ body {
 }
 
 @media screen and (max-width: 768px) {
-    /* Hide input section on mobile */
-    .input-section, .generate-btn {
-        display: none;
-    }
-
-    /* Reset body and container styles */
     body {
-        margin: 0;
-        padding: 0;
-        background: white;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 100vh;
-        overflow-x: hidden;
+        padding: 10px;
     }
 
     .container {
         margin: 0;
-        padding: 0;
         width: 100%;
-        background: white;
-        box-shadow: none;
+        border-radius: 8px;
+    }
+
+    .input-section {
+        padding: 15px;
     }
 
     .output-section {
-        display: block !important;
-        padding: 0;
-        margin: 0;
-        background: white;
+        padding: 10px;
+        overflow-x: auto;
     }
 
-    /* Scale formOutput to fit screen */
     #formOutput {
-        transform: scale(0.35);
-        transform-origin: top center;
-        margin: -5cm auto;
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%) scale(0.35);
-        box-shadow: none;
+        width: 100%;
+        min-height: auto;
+        padding: 15px;
+        font-size: 13px;
+        height: auto;
+        margin: 0 auto;
     }
     body {
         padding: 8px;
@@ -626,15 +611,81 @@ body {
 }
 
 @media print {
+    /* Seitenformat */
     @page {
         size: A4;
         margin: 0 !important;
     }
 
-    @-moz-document url-prefix() {
-        @page {
-            margin: 0 !important;
-        }
+    /* Grundlegende Dokumenteinstellungen */
+    html, body {
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 21cm !important;
+        height: 29.7cm !important;
+        background: white !important;
+    }
+
+    /* Container-Reset */
+    .container, .output-section {
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 21cm !important;
+        background: white !important;
+        box-shadow: none !important;
+    }
+
+    /* Ausblenden aller nicht-Druck Elemente */
+    body * {
+        visibility: hidden;
+    }
+
+    /* Formular-Ausgabe */
+    #formOutput, #formOutput * {
+        visibility: visible !important;
+    }
+
+    /* Exakte Formular-Positionierung */
+    #formOutput {
+        position: fixed !important;
+        left: 0 !important;
+        top: 0 !important;
+        width: 21cm !important;
+        height: 29.7cm !important;
+        margin: 0 !important;
+        padding: 2.54cm !important;
+        border: none !important;
+        print-color-adjust: exact !important;
+        -webkit-print-color-adjust: exact !important;
+        font-size: 10.5pt !important;
+        line-height: 1.2 !important;
+        background-color: white !important;
+        transform: none !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Verstecken der Druck-Buttons */
+    .print-btn {
+        display: none !important;
+    }
+    @page {
+        size: A4;
+        margin: 0 !important;
+    }
+
+    html, body {
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 21cm !important;
+        height: 29.7cm !important;
+    }
+
+    body * {
+        visibility: hidden;
+    }
+
+    #formOutput, #formOutput * {
+        visibility: visible;
     }
 
     body {
