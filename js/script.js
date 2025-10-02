@@ -133,42 +133,39 @@ function isMobile() {
 }
 
 async function generatePDF() {
-    // Nur den formOutput-Container für PDF verwenden
     const element = document.getElementById('formOutput');
     
-    // Temporär die mobile Styles für die PDF-Generierung anpassen
-    const originalStyles = {
-        transform: element.style.transform,
-        width: element.style.width,
-        height: element.style.height,
-        padding: element.style.padding
-    };
-
-    // Setze temporär die korrekten Maße für die PDF
-    element.style.transform = 'none';
-    element.style.width = '210mm';
-    element.style.height = '297mm';
-    element.style.padding = '25.4mm';
+    // Container für die PDF-Generierung erstellen
+    const pdfContainer = document.createElement('div');
+    pdfContainer.innerHTML = element.innerHTML;
+    pdfContainer.style.cssText = `
+        width: 21cm;
+        height: 29.7cm;
+        padding: 2.54cm;
+        background: white;
+        box-sizing: border-box;
+        font-size: 10.5pt;
+        line-height: 1.2;
+        position: fixed;
+        left: -9999px;
+    `;
+    document.body.appendChild(pdfContainer);
 
     const opt = {
         margin: 0,
         filename: 'Entschuldigung.pdf',
-        image: { type: 'jpeg', quality: 1 },
+        image: { type: 'jpeg', quality: 0.98 },
         html2canvas: {
-            scale: 3,
-            letterRendering: true,
+            scale: 2,
             useCORS: true,
-            logging: false,
-            width: 2480, // A4 bei 300dpi
-            height: 3508,
-            removeContainer: true,
-            backgroundColor: '#ffffff'
+            scrollY: -window.scrollY,
+            windowWidth: pdfContainer.offsetWidth * 2,
+            windowHeight: pdfContainer.offsetHeight * 2
         },
         jsPDF: {
             unit: 'mm',
             format: 'a4',
-            orientation: 'portrait',
-            compress: true
+            orientation: 'portrait'
         }
     };
 
@@ -177,27 +174,10 @@ async function generatePDF() {
     element.style.transform = 'none';
 
     try {
-        // PDF generieren
-        const pdf = await html2pdf()
-            .set(opt)
-            .from(element)
-            .toPdf()
-            .get('pdf')
-            .then((pdf) => {
-                // Nur eine Seite behalten
-                if (pdf.internal.pages.length > 1) {
-                    pdf.deletePage(2);
-                }
-                return pdf;
-            })
-            .save();
-        return pdf;
+        await html2pdf().set(opt).from(pdfContainer).save();
     } finally {
-        // Ursprüngliche Styles wiederherstellen
-        element.style.transform = originalStyles.transform;
-        element.style.width = originalStyles.width;
-        element.style.height = originalStyles.height;
-        element.style.padding = originalStyles.padding;
+        // Aufräumen
+        document.body.removeChild(pdfContainer);
     }
 }
 

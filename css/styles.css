@@ -556,16 +556,12 @@ body {
         print-color-adjust: exact !important;
         -webkit-print-color-adjust: exact !important;
         font-size: 10.5pt !important;
-        line-height: 1.1 !important;
+        line-height: 1.2 !important;
         background: white !important;
         transform: scale(0.35) !important;
         transform-origin: top center !important;
         box-sizing: border-box !important;
-        box-shadow: none !important;
-        page-break-after: avoid !important;
-        page-break-before: avoid !important;
-        page-break-inside: avoid !important;
-        overflow: hidden !important;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1) !important;
     }
 
     .print-btn {
