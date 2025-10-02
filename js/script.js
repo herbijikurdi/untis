@@ -133,21 +133,42 @@ function isMobile() {
 }
 
 async function generatePDF() {
+    // Nur den formOutput-Container für PDF verwenden
     const element = document.getElementById('formOutput');
+    
+    // Temporär die mobile Styles für die PDF-Generierung anpassen
+    const originalStyles = {
+        transform: element.style.transform,
+        width: element.style.width,
+        height: element.style.height,
+        padding: element.style.padding
+    };
+
+    // Setze temporär die korrekten Maße für die PDF
+    element.style.transform = 'none';
+    element.style.width = '210mm';
+    element.style.height = '297mm';
+    element.style.padding = '25.4mm';
+
     const opt = {
         margin: 0,
         filename: 'Entschuldigung.pdf',
-        image: { type: 'jpeg', quality: 0.98 },
+        image: { type: 'jpeg', quality: 1 },
         html2canvas: {
-            scale: 2,
+            scale: 3,
             letterRendering: true,
             useCORS: true,
-            logging: false
+            logging: false,
+            width: 2480, // A4 bei 300dpi
+            height: 3508,
+            removeContainer: true,
+            backgroundColor: '#ffffff'
         },
         jsPDF: {
             unit: 'mm',
             format: 'a4',
-            orientation: 'portrait'
+            orientation: 'portrait',
+            compress: true
         }
     };
 
@@ -156,11 +177,27 @@ async function generatePDF() {
     element.style.transform = 'none';
 
     try {
-        const pdf = await html2pdf().set(opt).from(element).save();
+        // PDF generieren
+        const pdf = await html2pdf()
+            .set(opt)
+            .from(element)
+            .toPdf()
+            .get('pdf')
+            .then((pdf) => {
+                // Nur eine Seite behalten
+                if (pdf.internal.pages.length > 1) {
+                    pdf.deletePage(2);
+                }
+                return pdf;
+            })
+            .save();
         return pdf;
     } finally {
-        // Transformation wiederherstellen
-        element.style.transform = originalTransform;
+        // Ursprüngliche Styles wiederherstellen
+        element.style.transform = originalStyles.transform;
+        element.style.width = originalStyles.width;
+        element.style.height = originalStyles.height;
+        element.style.padding = originalStyles.padding;
     }
 }
 
