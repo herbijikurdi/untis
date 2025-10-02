@@ -390,15 +390,33 @@ body {
     width: 100%;
 }
 
-.print-btn {
+.print-btn, .download-btn {
     margin-top: 20px;
     padding: 12px 30px;
-    background: #28a745;
     color: white;
     border: none;
     border-radius: 8px;
     font-size: 16px;
     cursor: pointer;
+    width: 100%;
+}
+
+.print-btn {
+    background: #28a745;
+}
+
+.download-btn {
+    background: #007bff;
+    margin-top: 10px;
+}
+
+@media screen and (min-width: 769px) {
+    .download-btn {
+        display: none;
+    }
+    .print-btn {
+        width: auto;
+    }
 }
 
 .print-btn:hover {
@@ -416,6 +434,26 @@ body {
         width: 100%;
         border-radius: 8px;
         overflow-x: hidden;
+    }
+    
+    .output-section {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .download-btn {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        margin: 0;
+        border-radius: 4px;
+        background: #2196F3;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    .print-btn {
+        display: none;
     }
     
     .print-btn {

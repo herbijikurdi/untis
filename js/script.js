@@ -133,38 +133,45 @@ function isMobile() {
 }
 
 async function generatePDF() {
-    const element = document.getElementById('formOutput');
+    // Aktuelle Scrollposition speichern
+    const scrollPos = window.scrollY;
     
-    // Container für die PDF-Generierung erstellen
-    const pdfContainer = document.createElement('div');
-    pdfContainer.innerHTML = element.innerHTML;
-    pdfContainer.style.cssText = `
-        width: 21cm;
-        height: 29.7cm;
-        padding: 2.54cm;
-        background: white;
-        box-sizing: border-box;
-        font-size: 10.5pt;
-        line-height: 1.2;
-        position: fixed;
-        left: -9999px;
+    // Formular für PDF vorbereiten
+    const element = document.getElementById('formOutput');
+    const originalStyle = element.style.cssText;
+    
+    // Temporäre Styles für PDF-Generierung
+    element.style.cssText = `
+        width: 210mm !important;
+        height: 297mm !important;
+        padding: 25.4mm !important;
+        margin: 0 !important;
+        position: absolute !important;
+        left: 0 !important;
+        top: 0 !important;
+        transform: none !important;
+        background: white !important;
+        font-size: 10.5pt !important;
+        line-height: 1.2 !important;
+        box-sizing: border-box !important;
     `;
-    document.body.appendChild(pdfContainer);
+
+    // Zum Seitenanfang scrollen
+    window.scrollTo(0, 0);
 
     const opt = {
         margin: 0,
         filename: 'Entschuldigung.pdf',
-        image: { type: 'jpeg', quality: 0.98 },
+        image: { type: 'jpeg', quality: 1 },
         html2canvas: {
-            scale: 2,
+            scale: 4,
             useCORS: true,
-            scrollY: -window.scrollY,
-            windowWidth: pdfContainer.offsetWidth * 2,
-            windowHeight: pdfContainer.offsetHeight * 2
+            logging: true,
+            backgroundColor: '#FFFFFF'
         },
         jsPDF: {
             unit: 'mm',
-            format: 'a4',
+            format: [210, 297],
             orientation: 'portrait'
         }
     };
@@ -174,18 +181,56 @@ async function generatePDF() {
     element.style.transform = 'none';
 
     try {
-        await html2pdf().set(opt).from(pdfContainer).save();
+        await html2pdf().set(opt).from(element).save();
     } finally {
-        // Aufräumen
-        document.body.removeChild(pdfContainer);
+        // Ursprüngliche Styles und Scrollposition wiederherstellen
+        element.style.cssText = originalStyle;
+        window.scrollTo(0, scrollPos);
     }
 }
 
-async function handlePrint() {
-    if (isMobile()) {
-        await generatePDF();
-    } else {
-        window.print();
+function handlePrint() {
+    window.print();
+}
+
+async function downloadPreview() {
+    const element = document.getElementById('formOutput');
+    
+    // Aktuelle Scrollposition und Styles speichern
+    const scrollPos = window.scrollY;
+    const originalTransform = element.style.transform;
+    
+    try {
+        // Styles für Screenshot anpassen
+        element.style.transform = 'none';
+        window.scrollTo(0, 0);
+        
+        // Screenshot erstellen und als PDF speichern
+        const canvas = await html2canvas(element, {
+            scale: 2,
+            useCORS: true,
+            backgroundColor: '#FFFFFF',
+            logging: false,
+            windowWidth: 2480,
+            windowHeight: 3508
+        });
+        
+        const { jsPDF } = window.jspdf;
+        const pdf = new jsPDF({
+            orientation: 'portrait',
+            unit: 'mm',
+            format: 'a4',
+            compress: true
+        });
+        
+        const imgData = canvas.toDataURL('image/jpeg', 1.0);
+        pdf.addImage(imgData, 'JPEG', 0, 0, 210, 297);
+        
+        pdf.save('Entschuldigung.pdf');
+    } finally {
+        // Ursprünglichen Zustand wiederherstellen
+        element.style.transform = originalTransform;
+        window.scrollTo(0, scrollPos);
     }
 }
 

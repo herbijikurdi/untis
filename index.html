@@ -105,12 +105,14 @@
         </div>
         
         <div class="output-section" id="outputSection">
+            <button class="download-btn" onclick="downloadPreview()">⬇️ Vorschau herunterladen</button>
             <div id="formOutput"></div>
-            <button class="print-btn" onclick="handlePrint()">🖨️ Drucken / Als PDF speichern</button>
+            <button class="print-btn" onclick="handlePrint()">🖨️ Drucken</button>
         </div>
     </div>
     
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="js/script.js"></script>
 </body>
 </html>
