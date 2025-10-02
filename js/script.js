@@ -263,7 +263,7 @@ function generateForm() {
                 <div class="checkbox-line fehlzeit-line">
                     <span class="checkbox checked"></span>
                     <strong>bei eintägigem Fehlzeiten</strong>
-                    <div class="fehlzeit-details">am <span class="field">${datum}</span></div>
+                    <div class="fehlzeit-details">am <span class="field" data-type="single-day" style="width: 282px !important; min-width: 282px !important; max-width: 282px !important;">${datum}</span></div>
                 </div>
             `;
         } else if (type === 'mehrtaetig') {
@@ -273,7 +273,7 @@ function generateForm() {
                 <div class="checkbox-line fehlzeit-line">
                     <span class="checkbox checked"></span>
                     <strong>bei mehreren Fehltagen</strong>
-                    <div class="fehlzeit-details">vom <span class="field">${von}</span> (vel.) bis <span class="field">${bis}</span></div>
+                    <div class="fehlzeit-details">vom <span class="field" data-type="multiple-days" style="width: 95px !important; min-width: 95px !important; max-width: 95px !important;">${von}</span> (vel.) bis <span class="field" data-type="multiple-days" style="width: 95px !important; min-width: 95px !important; max-width: 95px !important;">${bis}</span></div>
                 </div>
             `;
         } else if (type === 'einzelstunden') {
@@ -283,7 +283,7 @@ function generateForm() {
                 <div class="checkbox-line fehlzeit-line">
                     <span class="checkbox checked"></span>
                     <strong>bei einzelnen Fehlstunden</strong>
-                    <div class="fehlzeit-details">am <span class="field">${datum}</span> Abwesende Stunde(n) <span class="field">${stunden}</span></div>
+                    <div class="fehlzeit-details">am <span class="field" data-type="single-day" style="width: 100px !important; min-width: 100px !important; max-width: 100px !important;">${datum}</span> Abwesende Stunde(n) <span class="field" data-type="hours" style="width: 60px !important; min-width: 60px !important; max-width: 60px !important;">${stunden}</span></div>
                 </div>
             `;
         } else if (type === 'minuten') {
@@ -293,7 +293,7 @@ function generateForm() {
                 <div class="checkbox-line fehlzeit-line">
                     <span class="checkbox checked"></span>
                     <strong>bei Fehlminuten</strong>
-                    <div class="fehlzeit-details">am <span class="field">${datum}</span> Dauer der Verspätung: <span class="field">${dauer}</span></div>
+                    <div class="fehlzeit-details">am <span class="field" data-type="single-day" style="width: 100px !important; min-width: 100px !important; max-width: 100px !important;">${datum}</span> Dauer der Verspätung: <span class="field" data-type="duration" style="width: 60px !important; min-width: 60px !important; max-width: 60px !important;">${dauer}</span></div>
                 </div>
             `;
         }
@@ -364,7 +364,7 @@ function generateForm() {
         <div class="form-title" style="margin: 20px 0; font-size: 16px;">schriftliche Entschuldigung</div>
         
         <div class="form-content">
-            Name: <span class="field">${name}</span>
+            Name: <span class="field" style="width: 200px !important; min-width: 200px !important; max-width: 200px !important;">${name}</span>
             <span style="float: right;">Klasse: <span class="field">${klasse}</span></span>
         </div>
         
