@@ -343,15 +343,14 @@ body {
     margin: 20px 0;
 }
 
-.form-footer {
-    position: absolute;
-    bottom: 1.2cm;
-    left: 2.54cm;
-    right: 2.54cm;
-    page-break-inside: avoid;
-}
-
-.signatures {
+    .form-footer {
+        position: absolute;
+        bottom: 1.2cm;
+        left: 2.54cm;
+        right: 2.54cm;
+        page-break-inside: avoid !important;
+        page-break-before: avoid !important;
+    }.signatures {
     position: relative;
     width: 100%;
     margin-bottom: 1cm;
@@ -506,14 +505,13 @@ body {
     @page {
         size: A4 portrait;
         margin: 0 !important;
-        bleed: 0 !important;
     }
 
     html, body {
         margin: 0 !important;
         padding: 0 !important;
-        width: 21cm !important;
-        height: 29.7cm !important;
+        width: 100% !important;
+        min-height: 100% !important;
         background: white !important;
         -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
@@ -526,10 +524,13 @@ body {
     .container, .output-section {
         margin: 0 !important;
         padding: 0 !important;
-        width: 21cm !important;
+        width: 100% !important;
         background: white !important;
         box-shadow: none !important;
-        min-height: 29.7cm !important;
+        min-height: 100% !important;
+        page-break-inside: avoid !important;
+        page-break-before: avoid !important;
+        page-break-after: avoid !important;
     }
 
     #formOutput, #formOutput * {
@@ -537,11 +538,11 @@ body {
     }
 
     #formOutput {
-        position: fixed !important;
+        position: absolute !important;
         left: 0 !important;
         top: 0 !important;
-        width: 21cm !important;
-        height: 29.7cm !important;
+        width: 100% !important;
+        height: 100% !important;
         margin: 0 !important;
         padding: 2.54cm !important;
         border: none !important;
@@ -550,11 +551,12 @@ body {
         font-size: 10.5pt !important;
         line-height: 1.2 !important;
         background: white !important;
-        transform: scale(1) !important;
-        transform-origin: top left !important;
+        transform: none !important;
         box-sizing: border-box !important;
         box-shadow: none !important;
-        zoom: 1 !important;
+        page-break-after: avoid !important;
+        page-break-before: avoid !important;
+        page-break-inside: avoid !important;
     }
 
     .print-btn {
@@ -564,11 +566,13 @@ body {
     .form-content {
         line-height: 1.2;
         margin-bottom: 0.2cm;
+        page-break-inside: avoid !important;
     }
 
     .fehlzeit-section {
         margin: 0.15cm 0;
-        page-break-inside: avoid;
+        page-break-inside: avoid !important;
+        page-break-before: avoid !important;
     }
 
     .grund-line {
