@@ -417,6 +417,15 @@ body {
         border-radius: 8px;
         overflow-x: hidden;
     }
+    
+    .print-btn {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        margin: 0 0 10px 0;
+        width: 100%;
+        border-radius: 4px;
+    }
 
     .input-section {
         padding: 15px;
@@ -542,12 +551,12 @@ body {
         width: 100% !important;
         height: 100% !important;
         margin: 0 !important;
-        padding: 2.54cm !important;
+        padding: 1.8cm !important;
         border: none !important;
         print-color-adjust: exact !important;
         -webkit-print-color-adjust: exact !important;
         font-size: 10.5pt !important;
-        line-height: 1.2 !important;
+        line-height: 1.1 !important;
         background: white !important;
         transform: none !important;
         box-sizing: border-box !important;
@@ -562,13 +571,13 @@ body {
     }
 
     .form-content {
-        line-height: 1.2;
-        margin-bottom: 0.1cm;
+        line-height: 1.1;
+        margin-bottom: 0.05cm;
         page-break-inside: avoid !important;
     }
 
     .fehlzeit-section {
-        margin: 0.1cm 0;
+        margin: 0.05cm 0;
         page-break-inside: avoid !important;
         page-break-before: avoid !important;
     }
