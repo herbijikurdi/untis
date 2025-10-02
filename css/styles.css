@@ -410,7 +410,6 @@ body {
 }
 
 .print-btn, .download-btn {
-    margin-top: 20px;
     padding: 10px 25px;
     color: white;
     border: none;
@@ -418,10 +417,17 @@ body {
     font-size: 14px;
     cursor: pointer;
     width: 100%;
+    display: none;
+}
+
+.output-section.active .print-btn,
+.output-section.active .download-btn {
+    display: block;
 }
 
 .print-btn {
     background: #4a4a4a;
+    margin: 0 0 20px 0;
 }
 
 .download-btn {
@@ -431,10 +437,21 @@ body {
 
 @media screen and (min-width: 769px) {
     .download-btn {
-        display: none;
+        display: none !important;
     }
-    .print-btn {
+    .output-section {
+        position: relative;
+        padding-top: 70px !important;
+    }
+    .output-section.active .print-btn {
         width: auto;
+        position: absolute;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 100;
+        margin: 0;
+        display: block;
     }
 }
 
