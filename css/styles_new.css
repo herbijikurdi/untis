@@ -9,7 +9,6 @@ body {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     padding: 20px;
     min-height: 100vh;
-    margin: 0;
 }
 
 .container {
@@ -107,13 +106,12 @@ body {
     background: #218838;
 }
 
-/* Container für einzelne Fehlzeit-Einträge */
 .fehlzeit-item {
     background: white;
     border: 2px solid #667eea;
     border-radius: 8px;
     padding: 15px;
-    margin-bottom: 10px; /* Reduzierter Abstand zwischen Fehlzeit-Einträgen */
+    margin-bottom: 10px;
     position: relative;
 }
 
@@ -171,7 +169,7 @@ body {
 
 #formOutput {
     background: white;
-    padding: 2.54cm; /* Standardrand für A4 */
+    padding: 2.54cm;
     border: 1px solid #333;
     font-family: 'Courier New', monospace;
     width: 21cm;
@@ -310,10 +308,6 @@ body {
     padding-left: 12px;
 }
 
-.checkbox-line.fehlzeit-line {
-    margin-bottom: 8px;
-}
-
 .zusatz-section {
     margin: 15px 0;
     border-left: 3px solid #28a745;
@@ -339,7 +333,7 @@ body {
 .reason-box {
     border: 2px solid #333;
     padding: 15px;
-    min-height: 70px;
+    min-height: 52px;
     margin: 20px 0;
 }
 
@@ -408,10 +402,10 @@ body {
     background: #218838;
 }
 
+/* Mobile Styles */
 @media screen and (max-width: 768px) {
     body {
         padding: 10px;
-        min-height: unset;
     }
 
     .container {
@@ -432,11 +426,10 @@ body {
     #formOutput {
         width: 100%;
         min-height: auto;
-        padding: 1rem;
+        padding: 15px;
         font-size: 13px;
         height: auto;
         margin: 0 auto;
-        box-shadow: none;
     }
 
     .row {
@@ -456,9 +449,23 @@ body {
         gap: 12px;
     }
 
-    .field {
-        min-width: 80px;
-        max-width: 100%;
+    .checkbox-line {
+        grid-template-columns: 25px 1fr;
+        gap: 8px;
+        margin: 4px 0;
+    }
+
+    .checkbox-line.fehlzeit-line {
+        grid-template-columns: 25px auto 1fr;
+        gap: 8px;
+    }
+
+    .fehlzeit-details {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 8px;
+        align-items: center;
     }
 
     .header {
@@ -481,6 +488,11 @@ body {
         font-size: 11px;
     }
 
+    .form-title {
+        font-size: 15px;
+        margin: 10px 0;
+    }
+
     .signatures {
         display: flex;
         justify-content: space-between;
@@ -498,36 +510,47 @@ body {
     }
 }
 
+/* Print Styles */
 @media print {
     @page {
-        size: A4 portrait;
-        margin: 0 !important;
-        bleed: 0 !important;
+        size: A4;
+        margin: 0;
     }
 
-    html, body {
+    html {
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 21cm;
+        background: white;
+    }
+
+    body {
         margin: 0 !important;
         padding: 0 !important;
         width: 21cm !important;
         height: 29.7cm !important;
         background: white !important;
+        min-height: 29.7cm !important;
     }
 
-    body * {
-        visibility: hidden !important;
-    }
-
-    .container, .output-section {
+    .container {
         margin: 0 !important;
         padding: 0 !important;
         width: 21cm !important;
         background: white !important;
         box-shadow: none !important;
-        min-height: 29.7cm !important;
     }
 
-    #formOutput, #formOutput * {
-        visibility: visible !important;
+    .output-section {
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 21cm !important;
+        background: white !important;
+    }
+
+    .input-section,
+    .print-btn {
+        display: none !important;
     }
 
     #formOutput {
@@ -541,16 +564,12 @@ body {
         border: none !important;
         print-color-adjust: exact !important;
         -webkit-print-color-adjust: exact !important;
+        color-adjust: exact !important;
         font-size: 10.5pt !important;
         line-height: 1.2 !important;
         background: white !important;
         transform: none !important;
         box-sizing: border-box !important;
-        box-shadow: none !important;
-    }
-
-    .print-btn {
-        display: none !important;
     }
 
     .form-content {
