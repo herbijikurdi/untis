@@ -128,6 +128,50 @@ function formatDate(dateStr) {
     return date.toLocaleDateString('de-DE');
 }
 
+function isMobile() {
+    return window.innerWidth <= 768;
+}
+
+async function generatePDF() {
+    const element = document.getElementById('formOutput');
+    const opt = {
+        margin: 0,
+        filename: 'Entschuldigung.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: {
+            scale: 2,
+            letterRendering: true,
+            useCORS: true,
+            logging: false
+        },
+        jsPDF: {
+            unit: 'mm',
+            format: 'a4',
+            orientation: 'portrait'
+        }
+    };
+
+    // Temporär die mobile Transformation entfernen für die PDF-Generierung
+    const originalTransform = element.style.transform;
+    element.style.transform = 'none';
+
+    try {
+        const pdf = await html2pdf().set(opt).from(element).save();
+        return pdf;
+    } finally {
+        // Transformation wiederherstellen
+        element.style.transform = originalTransform;
+    }
+}
+
+async function handlePrint() {
+    if (isMobile()) {
+        await generatePDF();
+    } else {
+        window.print();
+    }
+}
+
 function generateForm() {
     const name = document.getElementById('name').value || '';
     const klasse = document.getElementById('klasse').value || '';
