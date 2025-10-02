@@ -238,16 +238,14 @@ body {
     padding: 0 3px;
 }
 
-.checkbox-line {
-    margin: 5px 0;
-    display: grid;
-    grid-template-columns: 25px 1fr;
-    gap: 8px;
-    font-size: 0.9em;
-    align-items: baseline;
-}
-
-.checkbox-line.fehlzeit-line {
+    .checkbox-line {
+        margin: 3px 0;
+        display: grid;
+        grid-template-columns: 25px 1fr;
+        gap: 6px;
+        font-size: 0.9em;
+        align-items: baseline;
+    }.checkbox-line.fehlzeit-line {
     grid-template-columns: 30px 180px 1fr;
     gap: 15px;
 }
@@ -345,7 +343,7 @@ body {
 
     .form-footer {
         position: absolute;
-        bottom: 1.2cm;
+        bottom: 0.8cm;
         left: 2.54cm;
         right: 2.54cm;
         page-break-inside: avoid !important;
@@ -565,18 +563,18 @@ body {
 
     .form-content {
         line-height: 1.2;
-        margin-bottom: 0.2cm;
+        margin-bottom: 0.1cm;
         page-break-inside: avoid !important;
     }
 
     .fehlzeit-section {
-        margin: 0.15cm 0;
+        margin: 0.1cm 0;
         page-break-inside: avoid !important;
         page-break-before: avoid !important;
     }
 
     .grund-line {
-        margin: 0;
+        margin: 0.1cm 0;
         page-break-inside: avoid;
     }
 
