@@ -418,25 +418,29 @@ body {
         margin: 0;
         width: 100%;
         border-radius: 8px;
+        overflow-x: hidden;
     }
 
     .input-section {
         padding: 15px;
+        overflow-x: hidden;
     }
 
     .output-section {
         padding: 10px;
-        overflow-x: hidden;
+        overflow-x: auto;
+        max-width: 100vw;
     }
 
     #formOutput {
-        width: 100%;
-        min-height: auto;
-        padding: 1rem;
-        font-size: 13px;
-        height: auto;
+        width: 21cm;
+        height: 29.7cm;
+        padding: 2.54cm;
+        font-size: 10.5pt;
         margin: 0 auto;
-        box-shadow: none;
+        transform: scale(0.4);
+        transform-origin: top center;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
 
     .row {
