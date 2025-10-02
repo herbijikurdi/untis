@@ -26,7 +26,7 @@ body {
 .checkbox-line:has([data-type="multiple-days"]) .fehlzeit-details .field {
     width: 100px !important;
     min-width: 100px !important;
-    max-width: 100px !import    /* Felder für verschiedene Fehlzeitentypen im Druck */
+    max-width: 100px !important;    /* Felder für verschiedene Fehlzeitentypen im Druck */
     .fehlzeit-details .field {
         width: 60px !important;
         min-width: 60px !important;
